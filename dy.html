@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic table</title>
+    <style>
+        /* Centering the table container */
+        #table-container {
+            text-align: center;
+        }
+
+        /* Table styles */
+        td {
+            height: 30px;
+            width: 30px;
+            border: 3px solid;
+        }
+
+        tr:nth-child(even) {
+            background-color: orange;
+        }
+
+        /* Button container styles */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="table-container">
+    <h1>Dynamic table</h1>
+    <h2>Gulshan Pandey</h2>
+    <h3>24DEV015</h3>
+
+    <!-- Button container for adding/deleting columns -->
+    <div class="button-container">
+        <button onclick="addColumn()">+</button>
+        <button onclick="deleteColumn()">-</button>
+    </div>
+
+    <!-- Table -->
+    <table id="dytb1">
+        <tr>
+            <td id="one"></td>
+            <td id="one"></td>
+        </tr>
+        <tr>
+            <td id="one"></td>
+            <td id="two"></td>
+        </tr>
+    </table>
+
+    <!-- Button container for adding/deleting rows -->
+    <div class="button-container">
+        <button onclick="addRow()">+</button>
+        <button onclick="deleteRow()">-</button>
+    </div>
+</div>
+
+<script>
+    function addRow() {
+        var table = document.getElementById("dytb1");
+        var newRow = table.insertRow();
+        var numCells = table.rows[0].cells.length;
+        for (var i = 0; i < numCells; i++) {
+            var cell = newRow.insertCell(i);
+            cell.innerHTML = "";
+        }
+    }
+
+    function deleteRow() {
+        var table = document.getElementById("dytb1");
+        if (table.rows.length > 1) {
+            table.deleteRow(table.rows.length - 1);
+        } else {
+            alert("Cannot delete the row");
+        }
+    }
+
+    function addColumn() {
+        var table = document.getElementById("dytb1");
+        for (var i = 0; i < table.rows.length; i++) {
+            var cell = table.rows[i].insertCell(-1);
+            cell.innerHTML = "";
+        }
+    }
+
+    function deleteColumn() {
+        var table = document.getElementById("dytb1");
+        var cid = 1;
+        for (var i = 0; i < table.rows.length; i++) {
+            var row = table.rows[i];
+            if (row.cells.length > cid) {
+                row.deleteCell(cid);
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All tasks</title>
+    <style>
+        .container {
+            background-color: darkgray;
+            margin: 0 auto;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+        .a1 {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>All tasks</h2>
+        <div class="a1">
+            <a href="/dynamictable">Dynamic table</a>
+        </div>
+        <div class="a1">
+            <a href="/kukucube">kukucube</a>
+        </div>
+        <div class="a1">
+            <a href="/tictactoe">tictactoe</a>
+        </div>
+        <!-- Add more links for other tasks -->
+    </div>
+
+    <script>
+        // Retrieve JWT token from localStorage
+        const token = localStorage.getItem('token');
+
+        // If token is not present, redirect to login page
+        if (!token) {
+            window.location.href = '/login'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

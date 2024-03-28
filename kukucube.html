@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>dynamic1 table</title>
+    <style>
+        td {
+            width: 50px;
+            height: 50px;
+            border: 3px solid black;
+        }
+        .mycbt {
+            display: fixed;
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body bgcolor="orange">
+<center>
+    <h1>Gulshan Pandey</h1>
+    <h2>24DEV015</h2>
+    <div>
+        <div id="div1">Score</div>
+        <div id="counter"></div>
+    </div>
+    <table class="mycbt">
+        <tr>
+            <td class="tdid" onclick="start()"></td>
+            <td class="tdid"></td>
+        </tr>
+        <tr>
+            <td class="tdid"></td>
+            <td class="tdid"></td>
+        </tr>
+    </table>
+    <div id="fl"></div>
+</center>
+<script>
+    let count = 0;
+    let count1 = 10;
+    let timer;
+
+    function start() {
+        intialAdd();
+        count1 = 10;
+        count = 0;
+        clearInterval(timer);
+        timer = setInterval(updateCounter, 1000);
+    }
+
+    function updateCounter() {
+        count1--;
+        document.getElementById("counter").innerHTML = count1;
+        if (count1 === 0) {
+            clearInterval(timer);
+            alert("Time's up! Your score is: " + count);
+            resetTable();
+        }
+    }
+
+    function intialAdd() {
+        count++;
+        document.getElementById("div1").innerHTML = "Score" + " " + count;
+        var table = document.getElementsByClassName("mycbt")[0];
+        var newRow = table.insertRow();
+        var numCells = table.rows[0].cells.length;
+        index = 2;
+        for (var i = 0; i < numCells; i++) {
+            var cell = newRow.insertCell(i);
+            cell.setAttribute("class", "tdid");
+        }
+        for (var i = 0; i < table.rows.length; i++) {
+            var cell = table.rows[i].insertCell(index);
+            cell.setAttribute("class", "tdid");
+        }
+        fillColor();
+        fun1();
+    }
+
+    function resetTable() {
+        count = 0;
+        document.getElementById("div1").innerHTML = "Score" + " " + count;
+        var table = document.getElementsByClassName("mycbt")[0];
+        table.innerHTML = '<tr><td class="tdid" onclick="start()"></td><td class="tdid"></td></tr><tr><td class="tdid"></td><td class="tdid"></td></tr>';
+        clearInterval(timer);
+    }
+
+    function clickToExpand() {
+        count++;
+        document.getElementById("div1").innerHTML = "Score" + " " + count;
+        rcell.style.opacity = "100";
+        rcell.setAttribute("onclick", "");
+        var table = document.getElementsByClassName("mycbt")[0];
+        var newRow = table.insertRow();
+        var numCells = table.rows[0].cells.length;
+        index = 2;
+
+        for (var i = 0; i < numCells; i++) {
+            var cell = newRow.insertCell(i);
+            cell.setAttribute("class", "tdid");
+        }
+        for (var i = 0; i < table.rows.length; i++) {
+            var cell = table.rows[i].insertCell(index);
+            cell.setAttribute("class", "tdid");
+        }
+        fillColor();
+        fun1();
+    }
+
+    function fun1() {
+        rand = document.getElementsByTagName("td");
+        rcell = rand[Math.floor(Math.random() * rand.length)];
+        console.log(rcell);
+        rcell.style.opacity = "0.5";
+        rcell.setAttribute("onclick", "clickToExpand()");
+    }
+
+    function fillColor() {
+        let cole = getRandomColor();
+        console.log(cole);
+        len = document.getElementsByTagName("td");
+        for (i = 0; i < len.length; i++) {
+            len[i].style.backgroundColor = cole;
+        }
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    document.getElementById("div1").innerHTML = "Score" + "" + count;
+    timer = setInterval(updateCounter, 1000);
+</script>
+</body>
+</html>
